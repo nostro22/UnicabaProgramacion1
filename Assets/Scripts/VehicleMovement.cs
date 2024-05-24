@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class Hoover : MonoBehaviour
+public class VehicleMovement : MonoBehaviour
 {
     public float speed;
 
@@ -50,7 +51,7 @@ public class Hoover : MonoBehaviour
 
         RaycastHit hitInfo;
 
-        isOnGround = Physics.Raycast(ray, out hitInfo, maxGroundDist,whatIsGround);
+        isOnGround = Physics.Raycast(ray, out hitInfo, maxGroundDist, whatIsGround);
 
         if (isOnGround) {
             float height = hitInfo.distance;
@@ -76,8 +77,9 @@ public class Hoover : MonoBehaviour
         rigidbody.MoveRotation(Quaternion.Lerp(rigidbody.rotation, rotation, Time.deltaTime * 10f));
         //HAce la rotacion de la nave mas cinematica
         float angle = angleOfRoll * -input.rudder;
-        Quaternion bodyRotation = transform.rotation*Quaternion.Euler(0f,0f,angle);
+        Quaternion bodyRotation = transform.rotation * Quaternion.Euler(0f, 0f, angle);
         shipBody.rotation = Quaternion.Lerp(shipBody.rotation, bodyRotation, Time.deltaTime * 10f);
+    }
 
         void CalculatePropulsion() {
             float rotationTorque = input.rudder - rigidbody.angularVelocity.y;
@@ -100,8 +102,19 @@ public class Hoover : MonoBehaviour
             rigidbody.AddForce(transform.forward * propulsion, ForceMode.Acceleration);
 
         }
+        void OnCollisionStay(Collision collision) {
+            if (collision.gameObject.layer == LayerMask.NameToLayer("Wall")) {
 
-    }
-
+                Vector3 upwardForceFromCollision = Vector3.Dot(collision.impulse, transform.up) * transform.up;
+                rigidbody.AddForce(-upwardForceFromCollision, ForceMode.Impulse);
+            }
+        }
+        public float GetSpeedPercentage() {
+                return rigidbody.velocity.magnitude/terminalVelocity;
+        }
+        
 
 }
+
+
+
