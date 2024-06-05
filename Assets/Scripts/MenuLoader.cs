@@ -1,17 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using UnityEditor.XR;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class MenuLoader : MonoBehaviour
 {
     [SerializeField] GameObject PauseMenu;
     bool isPaused;
+
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button optionsButton;
+    [SerializeField] private Button controlsButton;
+    [SerializeField] private Button quitButton;
+    [SerializeField] private Button toMainMenuButton;
+    [SerializeField] private GameObject controlPanel;
+
+
+
+
+
     // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Awake() {
+        playButton.onClick.AddListener(LoadFirstLevel);
+        optionsButton.onClick.AddListener(OpenOptions);
+        controlsButton.onClick.AddListener(OpenControls);
+        quitButton.onClick.AddListener(OnQuit);
+        toMainMenuButton.onClick.AddListener(ToMainMenu);
     }
+
+    private void OnDestroy() {
+        playButton.onClick.RemoveAllListeners();
+        optionsButton.onClick.RemoveAllListeners();
+        controlsButton.onClick.RemoveAllListeners();
+        quitButton.onClick.RemoveAllListeners();
+        toMainMenuButton.onClick.RemoveAllListeners();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -26,9 +54,18 @@ public class MenuLoader : MonoBehaviour
         }
 
     }
-
-    
-
+    public void ToMainMenu() {
+        LoadLevel(0);
+    }
+    public void OpenControls() {
+       controlPanel.SetActive(true);
+    }
+    public void OpenOptions() {
+        Debug.Log("opciones");
+    }
+    public void LoadFirstLevel() {
+        LoadLevel(1);
+    }
     public void LoadLevel(int level) {
         SceneManager.LoadScene(level);
     }
@@ -46,5 +83,10 @@ public class MenuLoader : MonoBehaviour
         PauseMenu.SetActive(false);
         isPaused = false;
     }
-
+    public void OnQuit() {
+       Application.Quit();
+        #if UNITY_EDITOR
+                EditorApplication.ExitPlaymode();
+        #endif
+    }
 }
