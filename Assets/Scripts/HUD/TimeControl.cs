@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-//using TMPro;
+using Simplon;
 /*la funcion de este script es*/
 
 public class TimeControl : MonoBehaviour
@@ -20,7 +20,7 @@ public class TimeControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tiempoRestante > 0)
+        if (tiempoActual > 0)
         {
             //muestra una cuenta regresiva en el control de texto refernciado
             tiempoActual -= Time.deltaTime;
@@ -33,9 +33,10 @@ public class TimeControl : MonoBehaviour
         }
         else
         {
-            textoTemporizador.text = "00:00";
+            textoTemporizador.text = "00:00:00";
             // si se termina el tiempo mostrar pantalla de muerte
             //y volver al inicio
+            GameControler.instance.pasarNivel("Race1");
         }
     }
 
