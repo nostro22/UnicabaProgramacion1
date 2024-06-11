@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.XR;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using static Cinemachine.DocumentationSortingAttribute;
-using Simplon; //nameSpace del game manager
+using Simplon;
+using UnityEngine.Events; //nameSpace del game manager
 
 public class MenuLoader : MonoBehaviour
 {
@@ -19,6 +15,7 @@ public class MenuLoader : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button toMainMenuButton;
     [SerializeField] private GameObject controlPanel;
+    [SerializeField] private GameObject hudInfo;
 
 
 
@@ -26,19 +23,20 @@ public class MenuLoader : MonoBehaviour
 
     // Start is called before the first frame update
     private void Awake() {
-        playButton.onClick.AddListener(LoadFirstLevel);
-        optionsButton.onClick.AddListener(OpenOptions);
-        controlsButton.onClick.AddListener(OpenControls);
-        quitButton.onClick.AddListener(OnQuit);
-        toMainMenuButton.onClick.AddListener(ToMainMenu);
+        playButton?.onClick.AddListener(LoadFirstLevel);
+        optionsButton?.onClick.AddListener(OpenOptions);
+        controlsButton?.onClick.AddListener(OpenControls);
+        quitButton?.onClick.AddListener(OnQuit);
+        toMainMenuButton?.onClick.AddListener(ToMainMenu);
+        
     }
 
     private void OnDestroy() {
-        playButton.onClick.RemoveAllListeners();
-        optionsButton.onClick.RemoveAllListeners();
-        controlsButton.onClick.RemoveAllListeners();
-        quitButton.onClick.RemoveAllListeners();
-        toMainMenuButton.onClick.RemoveAllListeners();
+        playButton?.onClick.RemoveAllListeners();
+        optionsButton?.onClick.RemoveAllListeners();
+        controlsButton?.onClick.RemoveAllListeners();
+        quitButton?.onClick.RemoveAllListeners();
+        toMainMenuButton?.onClick.RemoveAllListeners();
     }
 
 
@@ -58,9 +56,10 @@ public class MenuLoader : MonoBehaviour
     public void ToMainMenu() {
         //carga el menu
         GameControler.instance.pasarNivel("MenuScene");
+        hudInfo?.gameObject.SetActive(false);
     }
     public void OpenControls() {
-       controlPanel.SetActive(true);
+       controlPanel?.SetActive(true);
     }
     public void OpenOptions() {
         Debug.Log("opciones");
@@ -68,8 +67,7 @@ public class MenuLoader : MonoBehaviour
     public void LoadFirstLevel() {
         //craga la primer pista de carreras
         GameControler.instance.pasarNivel("Race1");
-        
-
+        hudInfo?.gameObject.SetActive(true);
     }
     //anule esta funcion ya que ahora se usa desde el 
     //game manager
@@ -78,19 +76,22 @@ public class MenuLoader : MonoBehaviour
     }*/
    
     void OnPause() {
-    
-        Time.timeScale = 0f;
-        PauseMenu.SetActive(true);
+        hudInfo?.gameObject.SetActive(false);
+        controlPanel?.SetActive(false);
+        PauseMenu?.SetActive(true);
         isPaused = true;
+        Time.timeScale = 0f;
 
     }
     public void OnResume() {
         print("sin pausa");
         Time.timeScale = 1f;
-        PauseMenu.SetActive(false);
+        hudInfo?.gameObject.SetActive(true);
+        PauseMenu?.SetActive(false);
+        controlPanel?.SetActive(false);
         isPaused = false;
         //mostrar el hud del auto
-        GameControler.instance.agregarnEscena("Hud");
+        //GameControler.instance.agregarnEscena("Hud");
     }
     public void OnQuit() {
        Application.Quit();
