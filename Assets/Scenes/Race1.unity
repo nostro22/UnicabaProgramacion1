@@ -238,6 +238,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a416d448b640214c928d8d3aec8b6d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ConfLife: 2
+  ConfCombustible: 200
   totalVueltas: 3
 --- !u!1 &216858573 stripped
 GameObject:
@@ -697,6 +699,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &954309691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 216858573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f0e96450030904aa4ce19262fdfa57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1246019419
 GameObject:
   m_ObjectHideFlags: 3

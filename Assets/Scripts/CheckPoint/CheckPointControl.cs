@@ -18,7 +18,7 @@ public class CheckPointControl : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerInput Auto = other.GetComponent<PlayerInput>();
-        var controller = GameControler.instance;
+        var controller = GameControler.Instance;
         //buscar el componente time control
         TimeControl control_tiempo =FindObjectOfType<TimeControl>();
 
@@ -37,7 +37,7 @@ public class CheckPointControl : MonoBehaviour
                 if (IsGoal && controller.Obtener_vuelta() == controller.Obtener_totalVueltas())
                 {
                     //si es la meta y se completaron todas las vueltas pasa de nivel
-                    var controlador = GameControler.instance;
+                    var controlador = GameControler.Instance;
                     controlador.pasarNivel("Race2");
                 }
                 else if (IsGoal && controller.Obtener_vuelta() < controller.Obtener_totalVueltas())

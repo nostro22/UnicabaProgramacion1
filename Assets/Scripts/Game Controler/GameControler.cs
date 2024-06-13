@@ -9,11 +9,28 @@ namespace Simplon {
         public static GameControler Instance => instance;
         public static GameControler instance;
         private int Speed;
+        //Variables para manejar las vidas
+        [SerializeField] private int ConfLife=3;
+
+        public int Life { get; set; }
+
+        // //variables para manejar el combustible, default 200
+        [SerializeField] float ConfCombustible=200f;
+        public float Combustible { get; set; }
+
         //seteo las cantidad de vueltas por defect a 3
         [SerializeField] private int totalVueltas = 3;
+
         //guarda en que vuelta va la carrera
-        private int vuelta_actual = 1;
-        //inicializar
+        private int vuelta_actual;
+       
+        //variable que gurda la distancia recorrida
+        public float distancia { get; set; }
+        
+        //--------
+        /*-------------------------------------------*/
+        //--------
+
         private void Awake()
         {
             if (instance == null)
@@ -25,6 +42,22 @@ namespace Simplon {
             {
                 Destroy(gameObject);
             }
+            //inicializar variables
+            ResetVariables();
+        }
+
+        private void ResetVariables() {
+            //Funcion para renicicializar las variables
+
+            //setear las vidas a 3           
+            Life = ConfLife;
+            
+            //setear combustible a 200           
+            Combustible = ConfCombustible;
+
+            //setear vuelta actual a 1
+            vuelta_actual = 1;
+      
         }
         //cambiar de a la pista2
         public void pasarNivel(string nombre)
@@ -72,6 +105,32 @@ namespace Simplon {
             //devuelve el total de vueltas de la carrera
             return totalVueltas; ;
         }
+
+        public int ObtenerTotalVidas() {
+            //devuelve las vidas disponibles
+            return Life;
+        }
+
+        public void QuitarVida(int Cantidad) {
+            //quita la cantidad de vidas indicadas en el parametro
+            //y si llega a 0 rinicia la carrera
+            Life -= Cantidad;
+            if (Cantidad == 0) {
+                //perdio y vuelve a reiniciar el juego
+                pasarNivel("Race1");
+                ResetVariables();
+            }
+        }
+
+        public void ActualizarDistancia(float dist) {
+            //guarda la distancia recorrida
+            distancia = dist;
+        }
+
+        /*public float MostrarDistancia() { 
+            //devuelve la distrancia recorrida
+            return Distancia;
+        }*/
     }
 
 
