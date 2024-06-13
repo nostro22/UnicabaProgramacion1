@@ -4,6 +4,7 @@ using UnityEngine;
 using Simplon;
 using TMPro;
 using System;
+using UnityEditor;
 
 public class HUdControl : MonoBehaviour
 {
@@ -101,19 +102,23 @@ public class HUdControl : MonoBehaviour
     }
 
     private void MostrarDistancia() { 
-        //VisorDistancia.text=string.Format("{0,00}", Controler.MostrarDistancia());
+        //muestra la distancia recorrida en el hud
         VisorDistancia.text=Math.Round(GameControler.Instance.distancia, 2,MidpointRounding.AwayFromZero).ToString();
-        Debug.Log("distancia: " + GameControler.Instance.distancia);
+      
     }
 
     private void MostrarVida() {
         VisorVida.text = GameControler.Instance.Life.ToString();
     }
-    private void Reset_TimeControler() {
+    public void Reset_TimeControler() {
 
         tiempoActual = tiempoRestante;
     }
-    
+
+    public void AddTime(float Seg) { 
+        //sumar timepo extra
+        tiempoActual += Seg;
+    }
     
 
 }

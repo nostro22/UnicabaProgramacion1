@@ -19,8 +19,8 @@ public class CheckPointControl : MonoBehaviour
     {
         PlayerInput Auto = other.GetComponent<PlayerInput>();
         var controller = GameControler.Instance;
-        //buscar el componente time control
-        TimeControl control_tiempo =FindObjectOfType<TimeControl>();
+        //buscar el componente HudControl para manejar el tiempo
+        HUdControl control_tiempo =FindObjectOfType<HUdControl>();
 
         if (Auto != null)
         {
@@ -28,7 +28,9 @@ public class CheckPointControl : MonoBehaviour
             {
                 //indica si ya se paso por ese check Point
                 CheckpointEnter = true;
-                Debug.Log("vuelta " + controller.Obtener_vuelta() + " checkpoint nro: " + IdCheckPoint);
+                //resetear el tiempo
+                control_tiempo.Reset_TimeControler();
+               
             }
             //controal para evitar que retrocediendo hacia la meta se cuente una vuelta
             if (Checks_Activados())
@@ -47,8 +49,6 @@ public class CheckPointControl : MonoBehaviour
                     ResetAllCheckpoints();
                     //agregar vuelta al contador
                     controller.Sumar_vuelta();
-                    //resetear el tiempo
-                    control_tiempo.ResetearTiempoVuelta();
                 }
 
             }

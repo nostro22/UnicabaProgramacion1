@@ -661,7 +661,7 @@ MonoBehaviour:
   Vuelta_A: {fileID: 679019932}
   SpeedViewer: {fileID: 675041702}
   textoTemporizador: {fileID: 134671679}
-  tiempoRestante: 10
+  tiempoRestante: 20
   VisorDistancia: {fileID: 1796826606}
   VisorVida: {fileID: 1990974250}
 --- !u!1 &675041700
