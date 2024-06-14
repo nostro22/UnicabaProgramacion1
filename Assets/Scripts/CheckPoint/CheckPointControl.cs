@@ -18,9 +18,9 @@ public class CheckPointControl : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerInput Auto = other.GetComponent<PlayerInput>();
-        var controller = GameControler.instance;
-        //buscar el componente time control
-        TimeControl control_tiempo =FindObjectOfType<TimeControl>();
+        var controller = GameControler.Instance;
+        //buscar el componente HudControl para manejar el tiempo
+        HUdControl control_tiempo =FindObjectOfType<HUdControl>();
 
         if (Auto != null)
         {
@@ -28,7 +28,9 @@ public class CheckPointControl : MonoBehaviour
             {
                 //indica si ya se paso por ese check Point
                 CheckpointEnter = true;
-                Debug.Log("vuelta " + controller.Obtener_vuelta() + " checkpoint nro: " + IdCheckPoint);
+                //resetear el tiempo
+                control_tiempo.Reset_TimeControler();
+               
             }
             //controal para evitar que retrocediendo hacia la meta se cuente una vuelta
             if (Checks_Activados())
@@ -37,7 +39,7 @@ public class CheckPointControl : MonoBehaviour
                 if (IsGoal && controller.Obtener_vuelta() == controller.Obtener_totalVueltas())
                 {
                     //si es la meta y se completaron todas las vueltas pasa de nivel
-                    var controlador = GameControler.instance;
+                    var controlador = GameControler.Instance;
                     controlador.pasarNivel("Race2");
                 }
                 else if (IsGoal && controller.Obtener_vuelta() < controller.Obtener_totalVueltas())
@@ -47,8 +49,6 @@ public class CheckPointControl : MonoBehaviour
                     ResetAllCheckpoints();
                     //agregar vuelta al contador
                     controller.Sumar_vuelta();
-                    //resetear el tiempo
-                    control_tiempo.ResetearTiempoVuelta();
                 }
 
             }
