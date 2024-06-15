@@ -544,6 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28d70f58d649a74d968ed13d688ebb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 0}
 --- !u!1001 &7882666999104362192
 PrefabInstance:
   m_ObjectHideFlags: 0

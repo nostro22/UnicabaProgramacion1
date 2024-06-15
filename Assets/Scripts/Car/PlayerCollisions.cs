@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
 {
-    Transform respawnPoint;
+    [SerializeField]Transform respawnPoint;
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -18,6 +17,7 @@ public class PlayerCollisions : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Death")) {
+
             this.gameObject.transform.position = respawnPoint.position;
             this.gameObject.transform.rotation = respawnPoint.rotation;
 
