@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using Simplon;
 
@@ -11,7 +8,7 @@ IsGoal indica si ese checkpoint se comporta como meta*/
 public class CheckPointControl : MonoBehaviour
 {
     [SerializeField] private bool CheckpointEnter = false;//indica si ya se paso por ese check Point
-    [SerializeField] private int IdCheckPoint = 1;//numero para identificar checkpoint si hay mas de uno
+    //[SerializeField] private int IdCheckPoint = 1;//numero para identificar checkpoint si hay mas de uno
     [SerializeField] private bool IsGoal = false;//indica si este check point es la meta si se setea a true 
     private GameControler Controller;
 
@@ -23,7 +20,6 @@ public class CheckPointControl : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         PlayerInput Auto = other.GetComponent<PlayerInput>();
-       
         //buscar el componente HudControl para manejar el tiempo
         HUdControl control_tiempo =FindObjectOfType<HUdControl>();
 
@@ -43,7 +39,6 @@ public class CheckPointControl : MonoBehaviour
             //controal para evitar que retrocediendo hacia la meta se cuente una vuelta
             if (Checks_Activados())
             {
-
                 if (IsGoal && Controller.Obtener_vuelta() == Controller.Obtener_totalVueltas())
                 {
                     //si es la meta y se completaron todas las vueltas pasa de nivel
@@ -58,12 +53,8 @@ public class CheckPointControl : MonoBehaviour
                     //agregar vuelta al contador
                     Controller.Sumar_vuelta();
                 }
-
             }
-
         }
-
-
     }
 
     
@@ -72,13 +63,11 @@ public class CheckPointControl : MonoBehaviour
         // Método para restablecer todos los checkpoints
         // Encuentra todas las instancias de CheckPointControl en la escena
         CheckPointControl[] allCheckpoints = FindObjectsOfType<CheckPointControl>();
-
         // Recorre todas las instancias y restablece CheckpointEnter a false
         foreach (CheckPointControl checkpoint in allCheckpoints)
         {
             checkpoint.CheckpointEnter = false;
         }
-
         // Opcionalmente, se puede volver a establecer el checkpoint actual a true
         //de ser necesario
         //CheckpointEnter = true;
@@ -89,15 +78,11 @@ public class CheckPointControl : MonoBehaviour
         //metodo para controlar  el estado de los checkpoint
         //devuelve true si todos los checkpoint fueron cruzados
         //caso contrario devuelve false
-
         int control = 0;
         // Encuentra todas las instancias de CheckPointControl en la escena
-
         CheckPointControl[] allCheckpoints = FindObjectsOfType<CheckPointControl>();
-
         //resto 1 para no contar la meta
         int Total_checkP =allCheckpoints.Length - 1;
-
         // recorre todas las instancias checkpoint
         foreach (CheckPointControl checkpoint in allCheckpoints)
         {
@@ -108,7 +93,6 @@ public class CheckPointControl : MonoBehaviour
         }
        /* Debug.Log("total de checkpoits contados en ele bucle: "+control);
         Debug.Log("total de checkpoits: " + Total_checkP);*/
-
         if (Total_checkP == control)
         {   
             //no paso por ningun checkpoint aun

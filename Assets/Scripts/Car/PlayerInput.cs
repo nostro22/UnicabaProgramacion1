@@ -21,7 +21,6 @@ public class PlayerInput : MonoBehaviour
     {
         rb= GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
-        Debug.Log(animator);
     }
 
     // Update is called once per frame

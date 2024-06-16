@@ -11,8 +11,9 @@ public class SpeedContro : MonoBehaviour
     //referencia al text donde se mostrara la velocidad tiene que ser un textmeshpro-textUI
     [SerializeField] private TextMeshProUGUI SpeedViewer;
     [SerializeField]private Slider speedSlider;
-    [SerializeField] private AudioSource speedAudioSource;
+    private AudioSource speedAudioSource;
     private void Start() {
+        speedAudioSource = GameObject.FindGameObjectWithTag("Player")?.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -27,6 +28,7 @@ public class SpeedContro : MonoBehaviour
         float valorNormalizado = speedSlider.value / 55f; // Normaliza el valor original a 0-1
         float valorInterpolado = Mathf.Lerp(0, 2, valorNormalizado); // Usa Mathf.Lerp para interpolar en el nuevo rango
         float valorFinal = valorInterpolado * 2; // Desnormaliza el valor al rango 0-2
+        if(speedAudioSource!=null)
         speedAudioSource.pitch = valorFinal;
     }
 }
