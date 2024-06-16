@@ -27,20 +27,20 @@ public class VehicleMovement : MonoBehaviour
     public float hoverGravity = 20f;
     public float fallGravity = 80f;
 
-    Rigidbody rigidbody;
+    private Rigidbody rigidbodyCar;
     PlayerInput input;
     float drag;
     bool isOnGround;
 
     private void Start() {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbodyCar = GetComponent<Rigidbody>();
         input=GetComponent<PlayerInput>();
 
         drag = driveForce / terminalVelocity;
     }
 
     private void FixedUpdate() {
-        speed = Vector3.Dot(rigidbody.velocity, transform.forward);
+        speed = Vector3.Dot(rigidbodyCar.velocity, transform.forward);
 
         CalculateHover();
         CalculatePropulsion();
@@ -68,20 +68,20 @@ public class VehicleMovement : MonoBehaviour
 
             Vector3 gravity = -groundNormal * hoverGravity * height;
 
-            rigidbody.AddForce(force, ForceMode.Acceleration);
-            rigidbody.AddForce(gravity, ForceMode.Acceleration);
+            rigidbodyCar.AddForce(force, ForceMode.Acceleration);
+            rigidbodyCar.AddForce(gravity, ForceMode.Acceleration);
 
         } else {
             groundNormal = Vector3.up;
 
             Vector3 gravity = -groundNormal * fallGravity;
-            rigidbody.AddForce(-gravity, ForceMode.Acceleration);
+            rigidbodyCar.AddForce(-gravity, ForceMode.Acceleration);
         }
 
         Vector3 projection = Vector3.ProjectOnPlane(transform.forward, groundNormal);
         Quaternion rotation = Quaternion.LookRotation(projection, groundNormal);
 
-        rigidbody.MoveRotation(Quaternion.Lerp(rigidbody.rotation, rotation, Time.deltaTime * 10f));
+        rigidbodyCar.MoveRotation(Quaternion.Lerp(rigidbodyCar.rotation, rotation, Time.deltaTime * 10f));
         //HAce la rotacion de la nave mas cinematica
         float angle = angleOfRoll * -input.rudder;
         Quaternion bodyRotation = transform.rotation * Quaternion.Euler(0f, 0f, angle);
@@ -89,36 +89,36 @@ public class VehicleMovement : MonoBehaviour
     }
 
         void CalculatePropulsion() {
-            float rotationTorque = input.rudder - rigidbody.angularVelocity.y;
-            rigidbody.AddRelativeTorque(0f, rotationTorque, 0f, ForceMode.VelocityChange);
+            float rotationTorque = input.rudder - rigidbodyCar.angularVelocity.y;
+            rigidbodyCar.AddRelativeTorque(0f, rotationTorque, 0f, ForceMode.VelocityChange);
 
-            float sidewaySpeed = Vector3.Dot(rigidbody.velocity, transform.right);
+            float sidewaySpeed = Vector3.Dot(rigidbodyCar.velocity, transform.right);
 
             Vector3 sideFriction = -transform.right * (sidewaySpeed / Time.fixedDeltaTime);
 
-            rigidbody.AddForce(sideFriction, ForceMode.Acceleration);
+            rigidbodyCar.AddForce(sideFriction, ForceMode.Acceleration);
 
             if (input.thruster <= 0f)
-                rigidbody.velocity *= slowingVelFactor;
+                rigidbodyCar.velocity *= slowingVelFactor;
 
             if (!isOnGround)
                 return;
             if (input.isBraking)
-                rigidbody.velocity *= brakingVelFactor;
+                rigidbodyCar.velocity *= brakingVelFactor;
             float propulsion = driveForce * input.thruster - drag * Mathf.Clamp(speed, 0f, terminalVelocity);
-            rigidbody.AddForce(transform.forward * propulsion, ForceMode.Acceleration);
+            rigidbodyCar.AddForce(transform.forward * propulsion, ForceMode.Acceleration);
 
         }
         void OnCollisionStay(Collision collision) {
             if (collision.gameObject.layer == LayerMask.NameToLayer("Wall")) {
 
                 Vector3 upwardForceFromCollision = Vector3.Dot(collision.impulse, transform.up) * transform.up;
-                rigidbody.AddForce(-upwardForceFromCollision, ForceMode.Impulse);
+                rigidbodyCar.AddForce(-upwardForceFromCollision, ForceMode.Impulse);
             }
         }
         public float GetSpeedPercentage() {
 
-        return rigidbody.velocity.magnitude / terminalVelocity;
+        return rigidbodyCar.velocity.magnitude / terminalVelocity;
     }
         
 

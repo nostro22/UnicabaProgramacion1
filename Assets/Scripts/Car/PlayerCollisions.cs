@@ -1,27 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using Simplon;
 using UnityEngine;
 
 public class PlayerCollisions : MonoBehaviour
-{
-    Transform respawnPoint;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+{   
+    //Se asigna al serializable un objeto en scena vacio como punto default de iniciacion
+    [SerializeField]Transform respawnPoint;
+  
     private void OnTriggerEnter(Collider other) {
+        //Si el jugador muere lo transportamos al ultimo punto de respawn 
         if (other.gameObject.CompareTag("Death")) {
-            this.gameObject.transform.position = respawnPoint.position;
-            this.gameObject.transform.rotation = respawnPoint.rotation;
-
+            RespawnPlayer();
         }
+        //Actualizamos el punto de respawn 
         if (other.gameObject.CompareTag("Respawn")) {
             RespawnSystem respawn = other.GetComponent<RespawnSystem>();
             if (respawn != null) {
@@ -30,7 +20,17 @@ public class PlayerCollisions : MonoBehaviour
         }
     }
 
-    void Respawn() { 
-    
+     void OnCollisionEnter(Collision collision) {
+        //Si el jugador muere lo transportamos al ultimo punto de respawn 
+        if (collision.gameObject.CompareTag("BallOfDeath")) {
+            RespawnPlayer();
+        }
+     }
+
+    private void RespawnPlayer() {
+        this.gameObject.transform.position = respawnPoint.position;
+        this.gameObject.transform.rotation = respawnPoint.rotation;
+        GameControler.Instance.Life--;
     }
+
 }
