@@ -6,11 +6,14 @@ public class SphereShooter : MonoBehaviour
 {
     [SerializeField] private Transform position1;
     [SerializeField] private Transform position2;
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(ShooterOn());
         StartCoroutine(MoveCoroutine());
+
     }
 
     private void OnDisable() {
@@ -29,6 +32,7 @@ public class SphereShooter : MonoBehaviour
             if (ball != null) {
                 ball.transform.SetPositionAndRotation(transform.position, transform.rotation);
                 ball.SetActive(true);
+                audioSource.Play();
             }
            yield return new WaitForSeconds(1);
         }
