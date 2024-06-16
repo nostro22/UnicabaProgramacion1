@@ -29,7 +29,7 @@ public class CheckPointControl : MonoBehaviour
                 //indica si ya se paso por ese check Point
                 CheckpointEnter = true;
                 //resetear el tiempo
-                control_tiempo.Reset_TimeControler();
+                control_tiempo?.Reset_TimeControler();
                
             }
             //controal para evitar que retrocediendo hacia la meta se cuente una vuelta
