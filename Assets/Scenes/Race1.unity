@@ -185,7 +185,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 154094785}
-  m_LocalRotation: {x: 0.16923465, y: -0.0005266609, z: 0.000090433714, w: 0.9855757}
+  m_LocalRotation: {x: 0.16923465, y: -0.0005266948, z: 0.00009043954, w: 0.9855757}
   m_LocalPosition: {x: -194.20158, y: 15.512561, z: 808.97064}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -587,7 +587,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725493050}
-  m_LocalRotation: {x: 0.16923465, y: -0.0005266609, z: 0.000090433714, w: 0.9855757}
+  m_LocalRotation: {x: 0.16923465, y: -0.0005266948, z: 0.00009043954, w: 0.9855757}
   m_LocalPosition: {x: -194.20158, y: 15.512561, z: 808.97064}
   m_LocalScale: {x: 1.6932997, y: 1.0023423, z: 1.0005679}
   m_ConstrainProportionsScale: 0
@@ -4319,11 +4319,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6454524978761934926, guid: defd101194a47d24c9a67288e72310b2, type: 3}
       propertyPath: m_Size.x
-      value: 1.7114264
+      value: 1.7114303
       objectReference: {fileID: 0}
     - target: {fileID: 6454524978761934926, guid: defd101194a47d24c9a67288e72310b2, type: 3}
       propertyPath: m_Size.y
       value: 1.2061046
+      objectReference: {fileID: 0}
+    - target: {fileID: 6454524978761934926, guid: defd101194a47d24c9a67288e72310b2, type: 3}
+      propertyPath: m_Size.z
+      value: 2.6607578
       objectReference: {fileID: 0}
     - target: {fileID: 6454524978761934926, guid: defd101194a47d24c9a67288e72310b2, type: 3}
       propertyPath: m_Center.x
@@ -4331,11 +4335,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6454524978761934926, guid: defd101194a47d24c9a67288e72310b2, type: 3}
       propertyPath: m_Center.y
-      value: 0.21423504
+      value: 0.21423697
       objectReference: {fileID: 0}
     - target: {fileID: 6454524978761934926, guid: defd101194a47d24c9a67288e72310b2, type: 3}
       propertyPath: m_Center.z
-      value: -0.09821742
+      value: -0.058590088
       objectReference: {fileID: 0}
     - target: {fileID: 8251032219301235524, guid: defd101194a47d24c9a67288e72310b2, type: 3}
       propertyPath: m_Name

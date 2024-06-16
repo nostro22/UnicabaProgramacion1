@@ -42,11 +42,15 @@ namespace Simplon {
             {
                 Destroy(gameObject);
             }
+            
+        }
+        private void Start()
+        {
             //inicializar variables
             ResetVariables();
         }
 
-        private void ResetVariables() {
+        public void ResetVariables() {
             //Funcion para renicicializar las variables
 
             //setear las vidas a 3           

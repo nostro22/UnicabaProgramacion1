@@ -54,6 +54,7 @@ public class ControlDistancia : MonoBehaviour
             else
             {
                 //perdio riniciar el juego
+                Controler.ResetVariables();
                 Controler.pasarNivel("Race1");
             }
 
