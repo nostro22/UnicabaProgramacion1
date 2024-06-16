@@ -17,7 +17,7 @@ public class RelojControl : MonoBehaviour
         {
             control_tiempo.AddTime(TiempoExtra);
             Destroy(this.gameObject);
-            Debug.Log("choque con reloj");
+            //Debug.Log("choque con reloj");
         }
     }
 }

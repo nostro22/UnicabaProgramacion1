@@ -127,10 +127,10 @@ namespace Simplon {
             distancia = dist;
         }
 
-        /*public float MostrarDistancia() { 
-            //devuelve la distrancia recorrida
-            return Distancia;
-        }*/
+        public void ResetCombustible() {
+            //resetear el combustible
+            Combustible = ConfCombustible;
+        }
     }
 
 

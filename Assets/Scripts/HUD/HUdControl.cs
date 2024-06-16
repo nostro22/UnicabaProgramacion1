@@ -21,31 +21,31 @@ public class HUdControl : MonoBehaviour
     // Temporizador de 60 segundos (puedes ajustar este valor)
     [SerializeField] private float tiempoRestante = 60f;
 
-    //referencia al texbox para mostrar la distancia, y la vida
-    [SerializeField] private TextMeshProUGUI VisorDistancia,VisorVida;
+    //referencia al texbox para mostrar la distancia, vida, combustible
+    [SerializeField] private TextMeshProUGUI VisorDistancia,VisorVida,VisorCombustible;
 
     private float tiempoActual;
 
-    //Obtengo la instancia del game manager
-    //var Controler= GameControler.Instance;
+    //variable para la instancia del gamecontroler
+    private GameControler Controler;
 
     // Start is called before the first frame update
     void Start()
     {
         Reset_TimeControler();
-
+        Controler = GameControler.Instance;
     }
 
     // Update is called once per frame
     void Update()
     {
         //muestra en que vuelta esta, en el hud
-        Vuelta_A.text = string.Format("{0}", GameControler.Instance.Obtener_vuelta());
-        //Vuelta_A.text = string.Format("{0}", Controler.Obtener_totalVueltas());
+        Vuelta_A.text = string.Format("{0}", Controler.Obtener_vuelta());
+       
 
         //muestra la cantida vueltas para ganar en el hud
-        T_vueltas.text = string.Format("{0}", GameControler.Instance.Obtener_totalVueltas());
-        //T_vueltas.text = string.Format("{0}", Controler.Obtener_totalVueltas());
+        T_vueltas.text = string.Format("{0}", Controler.Obtener_totalVueltas());
+      
 
         //mostrar la velocidad
         mostrarSpeed();
@@ -55,6 +55,8 @@ public class HUdControl : MonoBehaviour
         MostrarDistancia();
         //mostrar las vidas disponibles
         MostrarVida();
+        //mostrar el combustible disponible
+        MostrarCombustible();
     }
 
     //
@@ -64,7 +66,7 @@ public class HUdControl : MonoBehaviour
     private void mostrarSpeed()
     {
         //muestra la velocidad 
-        SpeedViewer.text = string.Format("{0}", GameControler.Instance.ObtnerSpeed());
+        SpeedViewer.text = string.Format("{0}", Controler.ObtnerSpeed());
     }
 
     private void MostrarTiempo() {
@@ -95,6 +97,7 @@ public class HUdControl : MonoBehaviour
             {
                 // si se termina el y la vida tiempo mostrar pantalla de muerte
                 //y volver al inicio
+                GameControler.Instance.ResetCombustible();
                 GameControler.Instance.pasarNivel("Race1"); 
             }
         
@@ -103,12 +106,12 @@ public class HUdControl : MonoBehaviour
 
     private void MostrarDistancia() { 
         //muestra la distancia recorrida en el hud
-        VisorDistancia.text=Math.Round(GameControler.Instance.distancia, 2,MidpointRounding.AwayFromZero).ToString();
+        VisorDistancia.text=Math.Round(Controler.distancia, 2,MidpointRounding.AwayFromZero).ToString();
       
     }
 
     private void MostrarVida() {
-        VisorVida.text = GameControler.Instance.Life.ToString();
+        VisorVida.text = Controler.Life.ToString();
     }
     public void Reset_TimeControler() {
 
@@ -119,6 +122,10 @@ public class HUdControl : MonoBehaviour
         //sumar timepo extra
         tiempoActual += Seg;
     }
-    
+
+    private void MostrarCombustible() {
+        //mostrar el combustible disponible
+        VisorCombustible.text = ((int)Controler.Combustible).ToString();
+    }
 
 }

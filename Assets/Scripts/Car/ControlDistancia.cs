@@ -10,8 +10,11 @@ public class ControlDistancia : MonoBehaviour
     private float distanciaTotalRecorrida;
     float control;
 
-    //Obtengo la instancia del game manager
-    //private GameControler Controler = GameControler.Instance;
+    //configura el consumo de combustible para el auto
+    [SerializeField] private float ConsumoCombustible=0.2f;
+
+    //variable para la instancia del game manager
+    private GameControler Controler;
 
     void Start()
 
@@ -20,6 +23,7 @@ public class ControlDistancia : MonoBehaviour
         posicionAnterior = transform.position;
         distanciaTotalRecorrida = 0f;
         control = 0f;
+        Controler = GameControler.Instance;
     }
 
     void Update()
@@ -35,11 +39,25 @@ public class ControlDistancia : MonoBehaviour
         posicionAnterior = transform.position;
 
         //Controler.Distancia = distanciaTotalRecorrida;
-        GameControler.Instance.distancia = distanciaTotalRecorrida;
+        Controler.distancia = distanciaTotalRecorrida;
 
-       if (control > 1) {
+       if (control > 1 ) {
             //si recorio mas de 1 metro restar combustible
-            //resetear la variable conbtrol
+            if (Controler.Combustible > 0)
+            {
+                QuitarCombustible(ConsumoCombustible);
+            }
+            else if(Controler.Life>1) { 
+                Controler.Life--;
+                Controler.ResetCombustible();
+            }
+            else
+            {
+                //perdio riniciar el juego
+                Controler.pasarNivel("Race1");
+            }
+
+            //resetear la variable control
             control = 0;
         }
         // (Opcional) Mostrar la distancia total recorrida en la consola
@@ -52,7 +70,10 @@ public class ControlDistancia : MonoBehaviour
         return distanciaTotalRecorrida;
     }
 
-    private void QuitarCombustible() { 
-    
+    //metodo para descontar combustible a medida que se avanza
+    private void QuitarCombustible(float restar) { 
+        Controler.Combustible-=restar;
     }
+
+
 }
