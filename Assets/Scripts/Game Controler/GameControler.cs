@@ -131,6 +131,10 @@ namespace Simplon {
             //resetear el combustible
             Combustible = ConfCombustible;
         }
+
+        public float ObtenerMaxFuel() {
+            return ConfCombustible;
+        }
     }
 
 

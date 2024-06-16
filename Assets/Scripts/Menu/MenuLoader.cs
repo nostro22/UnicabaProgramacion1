@@ -90,7 +90,7 @@ public class MenuLoader : MonoBehaviour
         PauseMenu.SetActive(false);
         isPaused = false;
         //mostrar el hud del auto
-        GameControler.instance.agregarnEscena("Hud");
+        GameControler.instance.agregarnEscena("Hud_v2.0");
     }
     public void OnQuit() {
        Application.Quit();
