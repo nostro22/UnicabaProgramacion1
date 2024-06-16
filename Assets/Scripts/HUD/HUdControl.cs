@@ -97,7 +97,7 @@ public class HUdControl : MonoBehaviour
             {
                 // si se termina el y la vida tiempo mostrar pantalla de muerte
                 //y volver al inicio
-                GameControler.Instance.ResetVariables();
+                GameControler.Instance.ResetCombustible();
                 GameControler.Instance.pasarNivel("Race1"); 
             }
         
