@@ -50,7 +50,7 @@ public class VehicleMovement : MonoBehaviour
     {
         //Debug.Log(GetSpeedPercentage());
         //actualizo la velocidad en el game controler
-        GameControler.instance.actualizarSpeed(GetSpeedPercentage());
+        GameControler.Instance.actualizarSpeed(GetSpeedPercentage());
     }
     void CalculateHover() {
         Vector3 groundNormal;

@@ -42,11 +42,15 @@ namespace Simplon {
             {
                 Destroy(gameObject);
             }
+            
+        }
+        private void Start()
+        {
             //inicializar variables
             ResetVariables();
         }
 
-        private void ResetVariables() {
+        public void ResetVariables() {
             //Funcion para renicicializar las variables
 
             //setear las vidas a 3           
@@ -127,10 +131,10 @@ namespace Simplon {
             distancia = dist;
         }
 
-        /*public float MostrarDistancia() { 
-            //devuelve la distrancia recorrida
-            return Distancia;
-        }*/
+        public void ResetCombustible() {
+            //resetear el combustible
+            Combustible = ConfCombustible;
+        }
     }
 
 

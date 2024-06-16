@@ -13,12 +13,17 @@ public class CheckPointControl : MonoBehaviour
     [SerializeField] private bool CheckpointEnter = false;//indica si ya se paso por ese check Point
     [SerializeField] private int IdCheckPoint = 1;//numero para identificar checkpoint si hay mas de uno
     [SerializeField] private bool IsGoal = false;//indica si este check point es la meta si se setea a true 
+    private GameControler Controller;
 
+    private void Start()
+    {
+        Controller = GameControler.Instance;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         PlayerInput Auto = other.GetComponent<PlayerInput>();
-        var controller = GameControler.Instance;
+       
         //buscar el componente HudControl para manejar el tiempo
         HUdControl control_tiempo =FindObjectOfType<HUdControl>();
 
@@ -29,26 +34,29 @@ public class CheckPointControl : MonoBehaviour
                 //indica si ya se paso por ese check Point
                 CheckpointEnter = true;
                 //resetear el tiempo
+
                 control_tiempo?.Reset_TimeControler();
-               
+                //reset combustible
+                Controller.ResetCombustible();
+ 
             }
             //controal para evitar que retrocediendo hacia la meta se cuente una vuelta
             if (Checks_Activados())
             {
 
-                if (IsGoal && controller.Obtener_vuelta() == controller.Obtener_totalVueltas())
+                if (IsGoal && Controller.Obtener_vuelta() == Controller.Obtener_totalVueltas())
                 {
                     //si es la meta y se completaron todas las vueltas pasa de nivel
-                    var controlador = GameControler.Instance;
-                    controlador.pasarNivel("Race2");
+                    Controller.ResetVariables();
+                    Controller.pasarNivel("Race2");
                 }
-                else if (IsGoal && controller.Obtener_vuelta() < controller.Obtener_totalVueltas())
+                else if (IsGoal && Controller.Obtener_vuelta() < Controller.Obtener_totalVueltas())
                 {
                     //si aun faltan vueltas y paso por la meta se reestablecen las variables
                     //CheckPointEnter a false para la siguiente vuelta
                     ResetAllCheckpoints();
                     //agregar vuelta al contador
-                    controller.Sumar_vuelta();
+                    Controller.Sumar_vuelta();
                 }
 
             }
@@ -58,9 +66,10 @@ public class CheckPointControl : MonoBehaviour
 
     }
 
-    // Método para restablecer todos los checkpoints
+    
     private void ResetAllCheckpoints()
     {
+        // Método para restablecer todos los checkpoints
         // Encuentra todas las instancias de CheckPointControl en la escena
         CheckPointControl[] allCheckpoints = FindObjectsOfType<CheckPointControl>();
 
@@ -75,14 +84,20 @@ public class CheckPointControl : MonoBehaviour
         //CheckpointEnter = true;
     }
 
-    //metodo para controlar  el estado de los checkpoint
+    
     private bool Checks_Activados() {
+        //metodo para controlar  el estado de los checkpoint
         //devuelve true si todos los checkpoint fueron cruzados
         //caso contrario devuelve false
+
         int control = 0;
         // Encuentra todas las instancias de CheckPointControl en la escena
+
         CheckPointControl[] allCheckpoints = FindObjectsOfType<CheckPointControl>();
-        int Total_checkP=allCheckpoints.Length - 1;//resto 1 para no contar la meta
+
+        //resto 1 para no contar la meta
+        int Total_checkP =allCheckpoints.Length - 1;
+
         // recorre todas las instancias checkpoint
         foreach (CheckPointControl checkpoint in allCheckpoints)
         {
@@ -91,8 +106,8 @@ public class CheckPointControl : MonoBehaviour
                 control++;
             }
         }
-        Debug.Log("total de checkpoits contados en ele bucle: "+control);
-        Debug.Log("total de checkpoits: " + Total_checkP);
+       /* Debug.Log("total de checkpoits contados en ele bucle: "+control);
+        Debug.Log("total de checkpoits: " + Total_checkP);*/
 
         if (Total_checkP == control)
         {   

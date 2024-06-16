@@ -10,7 +10,6 @@ public class MenuLoader : MonoBehaviour
     bool isPaused;
 
     [SerializeField] private Button playButton;
-    [SerializeField] private Button optionsButton;
     [SerializeField] private Button controlsButton;
     [SerializeField] private Button quitButton;
     [SerializeField] private Button toMainMenuButton;
@@ -24,7 +23,6 @@ public class MenuLoader : MonoBehaviour
     // Start is called before the first frame update
     private void Awake() {
         playButton?.onClick.AddListener(LoadFirstLevel);
-        optionsButton?.onClick.AddListener(OpenOptions);
         controlsButton?.onClick.AddListener(OpenControls);
         quitButton?.onClick.AddListener(OnQuit);
         toMainMenuButton?.onClick.AddListener(ToMainMenu);
@@ -33,7 +31,6 @@ public class MenuLoader : MonoBehaviour
 
     private void OnDestroy() {
         playButton?.onClick.RemoveAllListeners();
-        optionsButton?.onClick.RemoveAllListeners();
         controlsButton?.onClick.RemoveAllListeners();
         quitButton?.onClick.RemoveAllListeners();
         toMainMenuButton?.onClick.RemoveAllListeners();
@@ -61,9 +58,7 @@ public class MenuLoader : MonoBehaviour
     public void OpenControls() {
        controlPanel?.SetActive(true);
     }
-    public void OpenOptions() {
-        Debug.Log("opciones");
-    }
+
     public void LoadFirstLevel() {
         //craga la primer pista de carreras
         GameControler.instance.pasarNivel("Race1");
