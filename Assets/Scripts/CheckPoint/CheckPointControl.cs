@@ -50,7 +50,7 @@ public class CheckPointControl : MonoBehaviour
                 {
                     //si es la meta y se completaron todas las vueltas pasa de nivel
                     Controller.ResetVariables();
-                    Controller.pasarNivel("Race2");
+                    Controller.pasarNivel("Win_Screen");
                 }
                 else if (IsGoal && Controller.Obtener_vuelta() < Controller.Obtener_totalVueltas())
                 {

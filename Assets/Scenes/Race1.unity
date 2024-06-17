@@ -519,7 +519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConfLife: 5
   ConfCombustible: 200
-  totalVueltas: 3
+  totalVueltas: 1
 --- !u!1 &217445996
 GameObject:
   m_ObjectHideFlags: 0
