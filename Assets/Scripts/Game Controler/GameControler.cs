@@ -16,6 +16,9 @@ namespace Simplon {
 
         // //variables para manejar el combustible, default 200
         [SerializeField] float ConfCombustible=200f;
+        public float ObtenerMaxFuel() {
+            return ConfCombustible;
+        }
         public float Combustible { get; set; }
 
         //seteo las cantidad de vueltas por defect a 3

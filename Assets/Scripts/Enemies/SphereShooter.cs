@@ -6,6 +6,7 @@ public class SphereShooter : MonoBehaviour
 {
     [SerializeField] private Transform position1;
     [SerializeField] private Transform position2;
+    [SerializeField] private float coolDownInSec = 4;
     private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
@@ -34,7 +35,7 @@ public class SphereShooter : MonoBehaviour
                 ball.SetActive(true);
                 audioSource.Play();
             }
-           yield return new WaitForSeconds(1);
+           yield return new WaitForSeconds(coolDownInSec);
         }
     }
     IEnumerator MoveCoroutine() {

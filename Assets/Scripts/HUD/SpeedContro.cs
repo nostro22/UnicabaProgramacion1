@@ -11,8 +11,9 @@ public class SpeedContro : MonoBehaviour
     //referencia al text donde se mostrara la velocidad tiene que ser un textmeshpro-textUI
     [SerializeField] private TextMeshProUGUI SpeedViewer;
     [SerializeField]private Slider speedSlider;
-    [SerializeField] private AudioSource speedAudioSource;
+     private AudioSource speedAudioSource;
     private void Start() {
+        speedAudioSource = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

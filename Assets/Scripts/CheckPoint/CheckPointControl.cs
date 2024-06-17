@@ -25,7 +25,7 @@ public class CheckPointControl : MonoBehaviour
         PlayerInput Auto = other.GetComponent<PlayerInput>();
        
         //buscar el componente HudControl para manejar el tiempo
-        HUdControl control_tiempo =FindObjectOfType<HUdControl>();
+        TimeControl control_tiempo =FindObjectOfType<TimeControl>();
 
         if (Auto != null)
         {

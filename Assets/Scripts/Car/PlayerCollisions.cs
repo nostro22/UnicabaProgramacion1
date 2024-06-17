@@ -1,3 +1,4 @@
+using Simplon;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,10 +20,7 @@ public class PlayerCollisions : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         //Si el jugador muere lo transportamos al ultimo punto de respawn 
         if (other.gameObject.CompareTag("Death")) {
-
-            this.gameObject.transform.position = respawnPoint.position;
-            this.gameObject.transform.rotation = respawnPoint.rotation;
-
+            Respawn();
         }
         //Actualizamos el punto de respawn 
         if (other.gameObject.CompareTag("Respawn")) {
@@ -36,10 +34,14 @@ public class PlayerCollisions : MonoBehaviour
      void OnCollisionEnter(Collision collision) {
         //Si el jugador muere lo transportamos al ultimo punto de respawn 
         if (collision.gameObject.CompareTag("BallOfDeath")) {
-            this.gameObject.transform.position = respawnPoint.position;
-            this.gameObject.transform.rotation = respawnPoint.rotation;
-
+            Respawn();
         }
+    }
+
+    void Respawn() {
+        this.gameObject.transform.position = respawnPoint.position;
+        this.gameObject.transform.rotation = respawnPoint.rotation;
+        GameControler.Instance.Life--;
     }
 
 }

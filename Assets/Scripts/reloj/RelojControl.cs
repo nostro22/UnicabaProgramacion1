@@ -11,7 +11,7 @@ public class RelojControl : MonoBehaviour
     {
         
         PlayerInput Auto = other.GetComponent<PlayerInput>();
-        HUdControl control_tiempo = FindObjectOfType<HUdControl>();
+        TimeControl control_tiempo = FindObjectOfType<TimeControl>();
 
         if (Auto != null)
         {
