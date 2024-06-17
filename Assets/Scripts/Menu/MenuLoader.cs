@@ -53,6 +53,7 @@ public class MenuLoader : MonoBehaviour
     public void ToMainMenu() {
         //carga el menu
         GameControler.Instance.pasarNivel("MenuScene");
+        Time.timeScale= 1.0f;
         //hudInfo?.gameObject.SetActive(false);//ya no se usa
     }
     public void OpenControls() {
