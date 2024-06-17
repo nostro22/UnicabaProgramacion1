@@ -14,7 +14,7 @@ public class MenuLoader : MonoBehaviour
     [SerializeField] private Button quitButton;
     [SerializeField] private Button toMainMenuButton;
     [SerializeField] private GameObject controlPanel;
-    [SerializeField] private GameObject hudInfo;
+    //[SerializeField] private GameObject hudInfo;
 
 
 
@@ -53,7 +53,7 @@ public class MenuLoader : MonoBehaviour
     public void ToMainMenu() {
         //carga el menu
         GameControler.Instance.pasarNivel("MenuScene");
-        hudInfo?.gameObject.SetActive(false);
+        //hudInfo?.gameObject.SetActive(false);//ya no se usa
     }
     public void OpenControls() {
        controlPanel?.SetActive(true);
@@ -63,16 +63,16 @@ public class MenuLoader : MonoBehaviour
         //craga la primer pista de carreras
         GameControler.Instance.pasarNivel("Race1");
         GameControler.Instance.agregarnEscena("Hud_V2.0");
-        hudInfo?.gameObject.SetActive(true);
+        //hudInfo?.gameObject.SetActive(true);//ya no se usa
     }
     //anule esta funcion ya que ahora se usa desde el 
     //game manager
     /*public void LoadLevel(int level) {
         SceneManager.LoadScene(level);
     }*/
-   
+
     void OnPause() {
-        hudInfo?.gameObject.SetActive(false);
+        //hudInfo?.gameObject.SetActive(false);//ya no se usa
         controlPanel?.SetActive(false);
         PauseMenu?.SetActive(true);
         isPaused = true;
@@ -82,7 +82,7 @@ public class MenuLoader : MonoBehaviour
     public void OnResume() {
         print("sin pausa");
         Time.timeScale = 1f;
-        hudInfo?.gameObject.SetActive(true);
+        //hudInfo?.gameObject.SetActive(true);//ya no se usa
         PauseMenu?.SetActive(false);
         controlPanel?.SetActive(false);
         isPaused = false;

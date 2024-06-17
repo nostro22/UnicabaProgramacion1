@@ -14,10 +14,12 @@ public class CheckPointControl : MonoBehaviour
     [SerializeField] private int IdCheckPoint = 1;//numero para identificar checkpoint si hay mas de uno
     [SerializeField] private bool IsGoal = false;//indica si este check point es la meta si se setea a true 
     private GameControler Controller;
+    private ClockContainer clockContainer;
 
     private void Start()
     {
         Controller = GameControler.Instance;
+        clockContainer= FindAnyObjectByType<ClockContainer>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -55,8 +57,12 @@ public class CheckPointControl : MonoBehaviour
                     //si aun faltan vueltas y paso por la meta se reestablecen las variables
                     //CheckPointEnter a false para la siguiente vuelta
                     ResetAllCheckpoints();
+
                     //agregar vuelta al contador
                     Controller.Sumar_vuelta();
+
+                    //reinstanciar Clock
+                    clockContainer.ReinstantiateClocks();
                 }
 
             }

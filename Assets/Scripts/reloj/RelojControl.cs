@@ -6,18 +6,28 @@ using UnityEngine;
 public class RelojControl : MonoBehaviour
 {
     [SerializeField] private float TiempoExtra=5f;
+    private PlayerInput Auto ;
+    private TimeControl control_tiempo ;
 
+   
+
+    private void Start()
+    {
+        control_tiempo = FindObjectOfType<TimeControl>();
+       
+       
+    }
     private void OnTriggerEnter(Collider other)
     {
-        
-        PlayerInput Auto = other.GetComponent<PlayerInput>();
-        TimeControl control_tiempo = FindObjectOfType<TimeControl>();
-
+        Auto = other.GetComponent<PlayerInput>();
+     
         if (Auto != null)
-        {
+        {//agreagr tiempo extra y destrir el reloj 
             control_tiempo.AddTime(TiempoExtra);
-            Destroy(this.gameObject);
-            //Debug.Log("choque con reloj");
+            Destroy(gameObject);
+            
         }
     }
+
+  
 }

@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour
     {
         rb= GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
-        Debug.Log(animator);
+        //Debug.Log(animator);
     }
 
     // Update is called once per frame
@@ -30,7 +30,7 @@ public class PlayerInput : MonoBehaviour
           rudder= Input.GetAxis("Horizontal");
          thruster = Input.GetAxis("Vertical");
         isBraking = Input.GetButton("Brake");
-                Debug.Log(isBraking);
+               // Debug.Log(isBraking);
         if (animator != null) {
             // Conditionally set the trigger based on the value of isBraking
             if (isBraking && !animator.GetBool("OnBreakingMode")) {
@@ -40,10 +40,10 @@ public class PlayerInput : MonoBehaviour
             if (!isBraking && animator.GetBool("OnBreakingMode")) {
                 animator.SetTrigger("BreakingOff");
                 animator.SetBool("OnBreakingMode", false);
-                Debug.Log("APago freno");
+                //Debug.Log("APago freno");
 
             }
-            animator.SetInteger("Speed", GameControler.instance.ObtnerSpeed());
+            animator.SetInteger("Speed", GameControler.Instance.ObtnerSpeed());
         } else {
             Debug.LogError("Animator component not found.");
         }
