@@ -52,7 +52,7 @@ public class MenuLoader : MonoBehaviour
     }
     public void ToMainMenu() {
         //carga el menu
-        GameControler.instance.pasarNivel("MenuScene");
+        GameControler.Instance.pasarNivel("MenuScene");
         hudInfo?.gameObject.SetActive(false);
     }
     public void OpenControls() {
@@ -61,7 +61,7 @@ public class MenuLoader : MonoBehaviour
 
     public void LoadFirstLevel() {
         //craga la primer pista de carreras
-        GameControler.instance.pasarNivel("Race1");
+        GameControler.Instance.pasarNivel("Race1");
         GameControler.Instance.agregarnEscena("Hud_V2.0");
         hudInfo?.gameObject.SetActive(true);
     }

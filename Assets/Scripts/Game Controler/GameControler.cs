@@ -122,7 +122,7 @@ namespace Simplon {
             //quita la cantidad de vidas indicadas en el parametro
             //y si llega a 0 rinicia la carrera
             Life -= Cantidad;
-            if (Cantidad == 0) {
+            if (Life < 1) {
                 //perdio y vuelve a reiniciar el juego
                 pasarNivel("Lose_Screen");
                 ResetVariables();

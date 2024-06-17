@@ -49,6 +49,7 @@ public class ControlDistancia : MonoBehaviour
             }
             else {
                 Controler.QuitarVida(1);
+                Controler.ResetCombustible();
             }
           
             //resetear la variable control
