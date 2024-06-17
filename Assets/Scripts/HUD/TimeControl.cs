@@ -49,21 +49,15 @@ public class TimeControl : MonoBehaviour
         else
         {
             textoTemporizador.text = "00:00:00";
+            GameControler.Instance.QuitarVida(1);
+            Reset_TimeControler();
 
-            if (GameControler.Instance.Life > 1)
-            {
-                //si aun tiene vidas se resta 1
-                GameControler.Instance.Life--;
-                //y se resetea el tiempo
-                Reset_TimeControler();
-            }
-            else
-            {
-                // si se termina el y la vida tiempo mostrar pantalla de muerte
-                //y volver al inicio
-                GameControler.Instance.ResetCombustible();
-                GameControler.Instance.pasarNivel("Race1");
-            }
+            //if (GameControler.Instance.Life > 1)
+            //{
+            //    //si aun tiene vidas se resta 1
+            //    //y se resetea el tiempo
+            //}
+            
 
         }
     }

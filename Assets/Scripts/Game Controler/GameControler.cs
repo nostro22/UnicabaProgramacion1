@@ -124,7 +124,7 @@ namespace Simplon {
             Life -= Cantidad;
             if (Cantidad == 0) {
                 //perdio y vuelve a reiniciar el juego
-                pasarNivel("Race1");
+                pasarNivel("Lose_Screen");
                 ResetVariables();
             }
         }

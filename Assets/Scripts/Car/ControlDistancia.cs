@@ -47,17 +47,10 @@ public class ControlDistancia : MonoBehaviour
             {
                 QuitarCombustible(ConsumoCombustible);
             }
-            else if(Controler.Life>1) { 
-                Controler.Life--;
-                Controler.ResetCombustible();
+            else {
+                Controler.QuitarVida(1);
             }
-            else
-            {
-                //perdio riniciar el juego
-                Controler.ResetVariables();
-                Controler.pasarNivel("Race1");
-            }
-
+          
             //resetear la variable control
             control = 0;
         }

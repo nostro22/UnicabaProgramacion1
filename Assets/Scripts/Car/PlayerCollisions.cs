@@ -7,9 +7,11 @@ public class PlayerCollisions : MonoBehaviour
 {   
     //Se asigna al serializable un objeto en scena vacio como punto default de iniciacion
     [SerializeField]Transform respawnPoint;
+    private GameControler gameControler;
     // Start is called before the first frame update
     void Start()
     {
+        gameControler = GameControler.Instance;
     }
 
     // Update is called once per frame
@@ -41,7 +43,7 @@ public class PlayerCollisions : MonoBehaviour
     void Respawn() {
         this.gameObject.transform.position = respawnPoint.position;
         this.gameObject.transform.rotation = respawnPoint.rotation;
-        GameControler.Instance.Life--;
+        gameControler.QuitarVida(1);
     }
 
 }
