@@ -66,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position1: {fileID: 8918713497578636513}
   position2: {fileID: 8918713498496961991}
+  coolDownInSec: 3
 --- !u!82 &892918892
 AudioSource:
   m_ObjectHideFlags: 0
