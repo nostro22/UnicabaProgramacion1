@@ -1,5 +1,4 @@
 using Simplon;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerInput : MonoBehaviour

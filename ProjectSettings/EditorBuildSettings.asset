@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Race1.unity
     guid: f54b9c5044b365f4b9679e37f292d303
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Race2.unity
     guid: 95d7a780537c6a94ba7aeb3cd874ad79
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Hud.unity
     guid: 7dbb09761a1b65441b80f644a0d4df73
   - enabled: 1
